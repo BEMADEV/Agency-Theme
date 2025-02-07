@@ -305,7 +305,6 @@ $(document).ready(function() {
 
 
                 var mergeFieldOptions = new Rock.Lava.CommonMergeFieldsOptions();
-                mergeFieldOptions.GetLegacyGlobalMergeFields = GetAttributeValue( "SupportLegacy" ).AsBoolean();
                 var commonMergeFields = Rock.Lava.LavaHelper.GetCommonMergeFields( this.RockPage, this.CurrentPerson, mergeFieldOptions );
 
                 var mergeFields = new Dictionary<string, object>( commonMergeFields );
@@ -331,10 +330,8 @@ $(document).ready(function() {
                 mergeFields.Add( "Group", group );
                 mergeFields.Add( "Members", members );
 
-
-
                 // TODO: When support for "Person" is not supported anymore (should use "CurrentPerson" instead), remove this line
-                mergeFields.AddOrIgnore( "Person", CurrentPerson );
+                mergeFields.TryAdd( "Person", CurrentPerson );
 
                 var template = GetTemplate();
 
